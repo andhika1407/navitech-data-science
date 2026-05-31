@@ -1,0 +1,9 @@
+.venv/
+utils/
+notes.txt
+archived_code/
+raw_data/
+analysis_data/
+old_analysis_data/
+model_data/
+Planning_EDA.txt
