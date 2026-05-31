@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -177,7 +178,9 @@ def header(section: str, title: str):
     st.markdown(f'<p class="section-title">{section}</p>', unsafe_allow_html=True)
     st.markdown(f'<p class="chart-title">{title}</p>', unsafe_allow_html=True)
 
-df = pd.read_csv('main.csv')
+
+csv_path = os.path.join(os.path.dirname(__file__), 'main.csv')
+df = pd.read_csv(csv_path)
 skill_cols = skill_columns(df)
 
 # Sidebar filters
