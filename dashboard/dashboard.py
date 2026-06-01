@@ -238,21 +238,6 @@ with col_left:
     cat_counts.columns = ["Kategori", "Jumlah"]
     cat_total = cat_counts['Jumlah'].sum()
 
-    # fig_cat = go.Figure(go.Bar(
-    #     x=cat_counts["Jumlah"],
-    #     y=cat_counts["Kategori"],
-    #     orientation="h",
-    #     marker=dict(
-    #         color=cat_counts["Jumlah"],
-    #         colorscale=[[0, ACCENT2], [1, ACCENT3]],
-    #         showscale=False,
-    #     ),
-    #     text=cat_counts["Jumlah"].apply(lambda v: f"{v:,}"),
-    #     textposition="outside",
-    #     textfont=dict(color=TEXT_DIM, size=11, family="DM Mono"),
-    #     hovertemplate="<b>%{y}</b><br>Jumlah: %{x:,}<extra></extra>",
-    # ))
-
     fig_cat = go.Figure(go.Pie(
         labels=cat_counts["Kategori"],
         values=cat_counts["Jumlah"],
@@ -262,16 +247,6 @@ with col_left:
         textfont=dict(size=11, family="DM Mono"),
         hovertemplate="<b>%{label}</b><br>%{value:,} lowongan (%{percent})<extra></extra>",
     ))
-    
-    # Apply base layout first
-    # fig_cat.update_layout(**PLOTLY_LAYOUT)
-    
-    # Then apply specific overrides
-    # fig_cat.update_layout(
-    #     height=400,
-    #     yaxis_autorange="reversed",  # Use dot notation for nested property
-    #     bargap=0.3,
-    # )
 
     fig_cat.update_traces(textposition='inside')
 
@@ -344,8 +319,7 @@ else:
     skill_salary = {}
     for sc in skill_cols:
         subset = salary_df[salary_df[sc] == 1]["med_salary"]
-        if len(subset) >= 5:           # minimal sample guard
-            skill_salary[sc] = subset.median()
+        skill_salary[sc] = subset.median()
 
     if not skill_salary:
         st.warning("Tidak cukup data skill + salary untuk ditampilkan.")
